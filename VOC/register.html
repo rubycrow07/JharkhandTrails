@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <link rel="stylesheet" href="style4.css" />
+  <style>
+    /* Position Back to Home button at top-right inside container */
+    .form-container {
+      position: relative;
+    }
+
+    .back-top-right {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #f107a3, #7b2ff7);
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(123, 47, 247, 0.4);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .back-top-right:hover {
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="form-body">
+  <div class="form-container container">
+    <!-- Back to Home button -->
+    <a href="../index.html" class="back-top-right">🏠 Home</a>
+
+    <h2>Create Account</h2>
+    <form id="register-form">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="Enter your email" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Enter password" required>
+
+      <label for="confirm-password">Confirm Password</label>
+      <input id="confirm-password" type="password" placeholder="Re-enter password" required>
+
+      <button class="btn-submit" type="submit">Register</button>
+    </form>
+
+    <div class="form-link">
+      <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+
+  <script src="script4.js"></script>
+</body>
+</html>

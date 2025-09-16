@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking - Airline Reservation</title>
+  <link rel="stylesheet" href="style4.css" />
+  <style>
+    /* Optional: styling for the back button */
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: linear-gradient(135deg,#7b2ff7,#f107a3);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(135deg,#f107a3,#7b2ff7);
+      transform: scale(1.05);
+    }
+
+    /* Center the button */
+    .back-btn-container {
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="booking-body">
+  <div class="booking-container container">
+    <div id="flight-info" class="flight-summary"></div>
+
+    <form id="booking-form">
+      <fieldset>
+        <legend>✈️ Number of Passengers</legend>
+        <label for="passenger-count">Enter number of passengers (1–10):</label>
+        <input type="number" id="passenger-count" min="1" max="10" required />
+        <button type="button" id="generate-passenger-fields" class="btn">Continue</button>
+      </fieldset>
+
+      <div id="passenger-details"></div>
+
+      <button type="submit" class="btn" id="final-submit" style="display: none;">Proceed to Payment</button>
+    </form>
+
+    <!-- Back button -->
+    <div class="back-btn-container">
+      <a href="search-results.html" class="back-btn">← Back to Search Results</a>
+    </div>
+  </div>
+
+  <script src="script4.js"></script>
+</body>
+</html>

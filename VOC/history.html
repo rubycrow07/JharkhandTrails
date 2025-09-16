@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booking History</title>
+  <link rel="stylesheet" href="style4.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Your Booking History</h1>
+
+    <!-- Cards will be injected here from JS -->
+    <div id="history-list" class="booking-summary"></div>
+
+    <div class="btn-group">
+      <a href="menu.html" class="btn btn-secondary">Back to Menu</a>
+      <button id="download-history-btn" class="btn btn-submit">Download All History</button>
+    </div>
+  </div>
+
+  <!-- Use your central JS file -->
+  <script src="script4.js"></script>
+</body>
+</html>

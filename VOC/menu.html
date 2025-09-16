@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Main Menu - Airline Reservation</title>
+  <link rel="stylesheet" href="style4.css" />
+
+  <style>
+    /* 🔹 Styles for Back to Home button */
+    .back-home {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .back-home a {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .back-home a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body class="menu-body">
+  <div class="menu-container">
+    <h1>Welcome, <span id="user-email"></span></h1>
+    <p>Choose an option below:</p>
+    <div class="menu-grid">
+      <a href="search.html" class="menu-card">Search Flights</a>
+      <a href="history.html" class="menu-card">Booking History</a>
+      <a href="helpline.html" class="menu-card">Helpline</a>
+      <button id="logout-btn" class="menu-card logout">Logout</button>
+    </div>
+
+    <!-- 🔹 Back to Home Button (Centered below menu-grid) -->
+    <div class="back-home">
+      <a href="../index.html">⬅ Back to Home</a>
+    </div>
+  </div>
+
+  <script src="script4.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Cost Estimator • Jharkhand Trails</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #a0caff, #d9bcf7);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .glass-card {
+      backdrop-filter: blur(20px) saturate(180%);
+      background-color: rgba(255,255,255,0.3);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .glass-card h2 {
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .glass-card label {
+      display: block;
+      text-align: left;
+      font-size: 0.9rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+    .glass-card select {
+      width: 100%;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      display: block;
+      height: 40px;           
+      overflow: hidden;
+    }
+    .glass-card select.scrollable-dropdown {
+      -webkit-appearance: none;
+      overflow-y: auto;
+    }
+    .glass-card input {
+      width: 100%;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+    .btn-solid {
+      background: linear-gradient(135deg, #ff6600, #ff9933);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
+    }
+    .btn-solid:hover {
+      background: linear-gradient(135deg, #ff9933, #ff6600);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 102, 0, 0.5);
+    }
+    #trip-cost-result {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 102, 0, 0.85);
+      color: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+    .back-button:hover {
+      background: rgba(255, 153, 51, 0.95);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    }
+
+    @media (max-width: 480px){
+      .back-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Back to Home Button -->
+  <a href="index.html" class="back-button">← Back to Home</a>
+  <div class="glass-card">
+    <h2>Trip Cost Estimator</h2>
+    <form id="trip-estimator">
+      <label>Destination (per night cost):</label>
+      <select id="trip-destination" class="scrollable-dropdown">
+        <option value="1800" data-modes="train,car">Dassam Falls</option>
+        <option value="2500" data-modes="train,car">Netarhat Hill Station</option>
+        <option value="2200" data-modes="train,car">Patratu Valley</option>
+        <option value="2000" data-modes="train,car">Baidyanath Temple</option>
+        <option value="2300" data-modes="train,car">Ranchi</option>
+        <option value="3000" data-modes="train,car">Jamshedpur</option>
+        <option value="1800" data-modes="train,car">Trikut Hill</option>
+        <option value="2000" data-modes="train,car">Hazirabag Lake</option>
+        <option value="1700" data-modes="train,car">Konardam</option>
+        <option value="2100" data-modes="train,car">Gharchala</option>
+        <option value="3200" data-modes="train,car">Burudi Lake</option>
+        <option value="1900" data-modes="train,car">Prashanth Hills</option>
+        <option value="2500" data-modes="train,car">Messenger Dam</option>
+      </select>
+
+      <label>Days:</label>
+      <input type="number" id="trip-days" value="1" min="1" />
+
+      <label>Hotel Class:</label>
+      <select id="hotel-class">
+        <option value="1">Standard</option>
+        <option value="1.5">Deluxe (+50%)</option>
+        <option value="2">Luxury (+100%)</option>
+      </select>
+
+      <label>Travel Mode & Cost:</label>
+      <select id="travel-mode">
+      </select>
+
+      <label>Number of Travelers:</label>
+      <input type="number" id="trip-people" value="1" min="1" />
+
+      <button type="button" onclick="calculateTripCost()" class="btn-solid">Estimate</button>
+    </form>
+
+    <div id="trip-cost-result"></div>
+  </div>
+
+  <script>
+    const travelCosts = {
+      DassamFalls: { car: 600, train: 600 },
+      Netarhat: { car: 9000, train: 1500 },
+      Patratu: { car: 2500, train: 1700 },
+      Baidyanath: { car: 8000, train: 1300 },
+      Ranchi: { car: 4000, train: 600 },
+      Jamshedpur: { car: 2500, train: 1500 },
+      TrikutHill: { car: 1500, train: 600 },
+      Hazirabag: { car: 2000, train: 600 },
+      Konardam: { car: 1700, train: 600 },
+      Gharchala: { car: 2000, train: 600 },
+      BurudiLake: { car: 3200, train: 600 },
+      PrashanthHills: { car: 2500, train: 600 },
+      MessengerDam: { car: 2500, train: 600 }
+    };
+
+    const destSelect = document.getElementById('trip-destination');
+    const modeSelect = document.getElementById('travel-mode');
+
+    destSelect.addEventListener('change', updateTravelModes);
+    function updateTravelModes() {
+      const destKey = destSelect.selectedOptions[0].textContent.replace(/\s+/g, '');
+      const modes = destSelect.selectedOptions[0].dataset.modes.split(',');
+      modeSelect.innerHTML = modes.map(m => 
+        `<option value="${travelCosts[destKey][m]}">${m.charAt(0).toUpperCase() + m.slice(1)}</option>`
+      ).join('');
+    }
+    updateTravelModes();
+
+    function calculateTripCost() {
+      const costPerNight = +destSelect.value;
+      const days = +document.getElementById('trip-days').value;
+      const hotelClass = +document.getElementById('hotel-class').value;
+      const travelCost = +modeSelect.value;
+      const people = +document.getElementById('trip-people').value;
+
+      const hotelCost = costPerNight * days * hotelClass;
+      const total = hotelCost + travelCost;
+      const perPerson = (total / people).toFixed(2);
+
+      document.getElementById('trip-cost-result').textContent =
+        `Total: ₹${total.toLocaleString()} • Per Person: ₹${perPerson}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search Flights - Airline Reservation</title>
+  <link rel="stylesheet" href="style4.css" />
+  <style>
+    /* Make Menu button same style and align right */
+    .btn-row {
+      display: flex;
+      justify-content: space-between; /* Search left, Menu right */
+      align-items: center;
+      margin-top: 15px;
+    }
+
+    .btn-row .btn {
+      padding: 14px 36px; /* same as search button */
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 14px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-row .btn-secondary {
+      background: linear-gradient(135deg, #7b2ff7, #f107a3); /* same as primary */
+      color: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(241, 7, 163, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-row .btn-secondary:hover {
+      background: linear-gradient(135deg, #f107a3, #7b2ff7);
+      box-shadow: 0 8px 30px rgba(123, 47, 247, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Search Flights</h1>
+    <form id="search-form" class="form">
+      <label for="origin">Origin</label>
+      <select id="origin" required>
+        <option value="" disabled selected>Select origin airport</option>
+      </select>
+
+      <label for="destination">Destination</label>
+      <select id="destination" required>
+        <option value="" disabled selected>Select destination airport</option>
+      </select>
+
+      <label for="date">Date of Travel</label>
+      <input type="date" id="date" required />
+
+      <div class="btn-row">
+        <button type="submit" class="btn">Search</button>
+        <a href="menu.html" class="btn btn-secondary">🏠 Menu</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="script4.js"></script>
+</body>
+</html>

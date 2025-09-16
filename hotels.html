@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Best Hotels • JharkhandTrails</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #fdfcfb, #e2d1c3);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    .location-section {
+      margin-bottom: 2rem;
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: 16px;
+      padding: 1rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .location-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .location-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .toggle-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .hotel-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      transition: max-height 0.3s ease;
+    }
+
+    .hotel-cards.collapsed {
+      display: none;
+    }
+
+    .hotel-card {
+      background: #fff;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      min-height: 120px;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .hotel-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 0.3rem;
+    }
+
+    .hotel-tag {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .hotel-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .hotel-link {
+      font-size: 0.9rem;
+      color: #007bff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .hotel-link:hover {
+      text-decoration: underline;
+      color: #0056b3;
+    }
+
+    .nearby-places {
+      font-size: 0.85rem;
+      color: #333;
+      margin-left: 0.5rem;
+      max-width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .view-more {
+      font-size: 0.85rem;
+      color: #ff6600;
+      cursor: pointer;
+      margin-left: 0.5rem;
+      text-decoration: underline;
+      max-width: 160px;
+    }
+
+    .expanded-places {
+      display: none;
+      font-size: 0.85rem;
+      color: #333;
+      margin-top: 0.2rem;
+      max-width: 160px;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #ff9933;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .back-button:hover {
+      background: #ff6600;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      margin: 10% auto;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #333;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #ff9933;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      background: rgba(240, 240, 240, 0.8);
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    .contact-icon {
+      font-size: 1.4rem;
+      margin-right: 0.8rem;
+      color: #ff9933;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .contact-text {
+      font-size: 1rem;
+      color: #333;
+      word-break: break-word;
+      font-weight: 500;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close-btn:hover {
+      color: #ff6600;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 1rem; }
+      .location-title { font-size: 1.4rem; }
+      .hotel-name { font-size: 1.1rem; }
+      .hotel-tag { font-size: 0.85rem; }
+      .back-button { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+      .modal-content { padding: 1.5rem; margin: 15% auto; }
+      .nearby-places { max-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">← Back to Home</a>
+  <h1>Best Hotels in Jharkhand</h1>
+
+  <!-- Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Contact Details</h2>
+      <div class="contact-info">
+        <div class="contact-item"><span class="contact-icon">📞</span><span class="contact-text">+91-1234567890</span></div>
+        <div class="contact-item"><span class="contact-icon">📧</span><span class="contact-text">contact@jharkhandtrails.com</span></div>
+        <div class="contact-item"><span class="contact-icon">📱</span><span class="contact-text">+91-9748890504 (WhatsApp)</span></div>
+        <div class="contact-item"><span class="contact-icon">🌐</span><span class="contact-text">https://rubycrow07.github.io/JharkhandTrails/</span></div>
+        <div class="contact-item"><span class="contact-icon">📸</span><span class="contact-text">@jharkhandtrails</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+const data = {
+  "Ranchi": [
+    {name: "Hotel Birsa Vihar", tag: "Luxury • ₹4,500–₹6,000/night", places: ["Jonha Falls", "Hundru Falls", "Dassam Falls"]},
+    {name: "Chanakya BNR Ranchi", tag: "Luxury • ₹5,000–₹7,000/night", places: ["Jonha Falls", "Dassam Falls"]},
+    {name: "Radisson Blu Ranchi", tag: "Luxury • ₹6,500–₹8,500/night", places: ["Hundru Falls", "Jonha Falls", "Dassam Falls", "Ranchi City Market", "Rock Garden"]},
+    {name: "Courtyard by Marriott Ranchi", tag: "Luxury • ₹6,000–₹8,000/night", places: ["Dassam Falls", "Hundru Falls"]},
+    {name: "Le Lac Sarovar Portico", tag: "Luxury • ₹7,000–₹9,000/night", places: ["Jonha Falls", "Hundru Falls", "Dassam Falls", "Baidyanath Temple", "Patratu Valley"]}
+  ],
+  "Jamshedpur": [
+    {name: "Vivanta Jamshedpur", tag: "Luxury • ₹6,000–₹8,000/night", places: ["Jubilee Park", "Dalma Wildlife Sanctuary"]},
+    {name: "The Alcor Hotel", tag: "Luxury • ₹5,000–₹7,000/night", places: ["Jubilee Park"]},
+    {name: "The Sonnet Jamshedpur", tag: "Luxury • ₹5,500–₹7,500/night", places: ["Dalma Wildlife Sanctuary"]},
+    {name: "Lemon Tree Hotel Centre Point", tag: "Luxury • ₹5,000–₹6,500/night", places: ["Jubilee Park", "Dalma Wildlife Sanctuary"]}
+  ],
+  "Dhanbad": [
+    {name: "Hotel Ratan Vihar", tag: "Mid-range • ₹2,500–₹3,500/night", places: ["Topchanchi Lake", "Maithon Dam"]},
+    {name: "Hotel Ajanta", tag: "Budget • ₹1,500–₹2,500/night", places: ["Topchanchi Lake"]},
+    {name: "Vivana - The Business Hotel", tag: "Luxury • ₹4,000–₹5,500/night", places: ["Maithon Dam"]},
+    {name: "Grand Mirage Dhanbad", tag: "Luxury • ₹4,500–₹6,000/night", places: ["Maithon Dam", "Trikut Hill"]}
+  ],
+  "Hazaribagh": [
+    {name: "Hotel Aranya Vihar", tag: "Mid-range • ₹2,500–₹3,500/night", places: ["Hazaribag Lake", "Konardam", "Netarhat Hill Station"]},
+    {name: "Hotel Indralok", tag: "Budget • ₹1,500–₹2,500/night", places: ["Hazaribag Lake", "Prashanth Hills"]}
+  ],
+  "Giridih": [
+    {name: "Hotel Meer Residency", tag: "Mid-range • ₹2,000–₹3,000/night", places: ["Gharchala", "Burudi Lake"]},
+    {name: "Margiya Suvidha Kendra Bagodar", tag: "Budget • ₹1,200–₹2,000/night", places: ["Messenger Dam"]}
+  ],
+  "Baidyanath Dham": [
+    {name: "Shiva Residency", tag: "Mid-range • ₹2,500–₹3,500/night", places: ["Baidyanath Temple"]}
+  ],
+  "Patratu": [
+    {name: "Patratu Valley Resort", tag: "Luxury • ₹5,000–₹6,500/night", places: ["Patratu Valley"]}
+  ],
+  "Netarhat": [
+    {name: "Netarhat Hill Resort", tag: "Mid-range • ₹3,000–₹4,500/night", places: ["Netarhat Hill Station"]}
+  ]
+};
+
+// Generate hotel sections dynamically
+const body = document.body;
+const modal = document.getElementById("contactModal");
+const closeBtn = document.querySelector(".close-btn");
+
+for (let city in data) {
+  const section = document.createElement('div');
+  section.className = 'location-section';
+
+  const title = document.createElement('div');
+  title.className = 'location-title collapsed';
+  title.setAttribute('aria-expanded', 'false');
+  title.innerHTML = `${city} <span class="toggle-icon">▼</span>`;
+
+  const cards = document.createElement('div');
+  cards.className = 'hotel-cards collapsed';
+
+  data[city].forEach(hotel => {
+    const card = document.createElement('div');
+    card.className = 'hotel-card';
+
+    let nearbyHtml = '';
+    if (hotel.places.length > 2) {
+      const firstTwo = hotel.places.slice(0,2).join(', ');
+      const remaining = hotel.places.slice(2).join(', ');
+      nearbyHtml = `
+        <div class="nearby-container">
+          <span class="nearby-places">${firstTwo}...</span>
+          <span class="view-more">View More</span>
+          <div class="expanded-places">${remaining}</div>
+        </div>
+      `;
+    } else {
+      nearbyHtml = `<div class="nearby-container"><span class="nearby-places">${hotel.places.join(', ')}</span></div>`;
+    }
+
+    const linkHtml = `<a class="hotel-link" href="#">Contact Us</a>`;
+    card.innerHTML = `
+      <div class="hotel-name">${hotel.name}</div>
+      <div class="hotel-tag">${hotel.tag}</div>
+      <div class="hotel-actions">${linkHtml} ${nearbyHtml}</div>
+    `;
+    cards.appendChild(card);
+
+    card.querySelector(".hotel-link").onclick = (e) => {
+      e.preventDefault();
+      modal.style.display = "block";
+    };
+
+    const viewMoreBtn = card.querySelector(".view-more");
+    if(viewMoreBtn){
+      viewMoreBtn.onclick = () => {
+        const expanded = card.querySelector(".expanded-places");
+        if(expanded.style.display === "block"){
+          expanded.style.display = "none";
+          viewMoreBtn.textContent = "View More";
+        } else {
+          expanded.style.display = "block";
+          viewMoreBtn.textContent = "View Less";
+        }
+      };
+    }
+  });
+
+  title.onclick = () => {
+    cards.classList.toggle('collapsed');
+    title.classList.toggle('collapsed');
+    const expanded = title.classList.contains('collapsed') ? 'false' : 'true';
+    title.setAttribute('aria-expanded', expanded);
+  };
+
+  section.appendChild(title);
+  section.appendChild(cards);
+  body.appendChild(section);
+}
+
+// Close modal
+closeBtn.onclick = () => {
+  modal.style.display = "none";
+};
+
+// Close modal when clicking outside content
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+  </script>
+</body>
+</html>

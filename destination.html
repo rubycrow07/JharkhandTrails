@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destination Details • JharkhandTrails</title>
+<link rel="icon" type="image/png" href="img/logo.png" />
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ---- Existing styles ---- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #8ac6ff, #d9bcf7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.glass-card {
+  width: 95%;
+  max-width: 1000px;
+  background-color: rgba(255,255,255,0.25);
+  backdrop-filter: blur(25px) saturate(180%);
+  border-radius: 25px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  padding: 2rem;
+  color: #fff;
+  animation: fadeIn 0.6s ease-out;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem 1.2rem;
+  background: rgba(0,0,0,0.35);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffeaa7;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.back-btn:hover {
+  background: rgba(255,255,255,0.2);
+  color: #ffdd59;
+}
+
+h1, h3, h4 {
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+#dest-name {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  color: #ffeaa7;
+}
+
+#dest-description {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #f7f1e3;
+  line-height: 1.5;
+}
+
+#dest-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+#dest-gallery img {
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#dest-gallery img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+/* Only affect clickable How to Reach items */
+/* Only affect clickable How to Reach items */
+#dest-reach .clickable {
+  cursor: pointer;
+  color: #fff;               /* normal text color */
+  text-decoration: none;     /* no underline by default */
+  transition: all 0.2s ease;
+}
+
+#dest-reach .clickable:hover {
+  color: #1e90ff;            /* blue on hover */
+  text-decoration: underline; /* underline on hover */
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+ul li {
+  margin-bottom: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: rgba(0,0,0,0.25);
+  border-radius: 12px;
+  transition: background 0.3s ease;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+ul li:hover {
+  background: rgba(255,255,255,0.2);
+  color: #ffdd59;
+}
+
+a {
+  color: #ffd32a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.info-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.info-card {
+  flex: 1 1 250px;
+  min-width: 250px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  background: rgba(0,0,0,0.35);
+}
+
+.info-card h4 {
+  margin-bottom: 0.8rem;
+  color: #ffeaa7;
+  text-align: center;
+}
+
+ul::-webkit-scrollbar { width: 6px; }
+ul::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+ul::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+</style>
+</head>
+<body>
+  <div class="glass-card" id="destination-container">
+    <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+    <h1 id="dest-name"></h1>
+    <p id="dest-description"></p>
+    <div id="dest-gallery"></div>
+    <h3>Nearby Hotels & Restaurants</h3>
+    <ul id="dest-hotels"></ul>
+    <h3>Things to Do</h3>
+    <ul id="dest-activities"></ul>
+    <h3>Best Time to Visit</h3>
+    <ul id="dest-besttime"></ul>
+    <h3>How to Reach</h3>
+    <ul id="dest-reach"></ul>
+
+    <div class="info-cards">
+      <div class="info-card" id="card-cuisine">
+        <h4>Local Cuisine</h4>
+        <ul id="dest-cuisine"></ul>
+      </div>
+
+      <div class="info-card" id="card-festivals">
+        <h4>Festivals & Events</h4>
+        <ul id="dest-festivals"></ul>
+      </div>
+
+      <div class="info-card" id="card-tips">
+        <h4>Travel Tips</h4>
+        <ul id="dest-tips-card"></ul>
+      </div>
+    </div>
+  </div>
+
+<script>
+const destinations = {
+  "dassam-falls": {
+    name: "Dassam Falls",
+    description: "Scenic waterfall located near Ranchi, popular for picnics and trekking.",
+    gallery: ["img/DassamFalls1.jpg", "img/DassamFalls2.jpg"],
+    hotels: [
+      `<a href="https://www.tripadvisor.in/Hotel_Review-g123456-dassam-falls-hotel.html" target="_blank">Falls View Resort</a>`,
+      `<a href="https://www.booking.com/hotel/in/dassam-falls-lodge.html" target="_blank">Ranchi Hills Lodge</a>`
+    ],
+    activities: ["Trekking", "Picnics", "Photography", "Eco-Tours", "Bird Watching"],
+    bestTime: "October to March: Pleasant weather and minimal rainfall.",
+    howToReach: {
+      text: "By Road: 40 km from Ranchi, accessible by car or taxi.",
+      mapLink: "https://maps.app.goo.gl/U3sQMjg4di6cyJiS6"
+    },
+    localCuisine: ["Dhuska", "Thekua", "Local street foods like chana sattu drink"],
+    festivals: ["Local Tribal Fairs", "Ranchi Cultural Events", "Karam Festival"],
+    travelTips: ["Wear comfortable shoes for trekking.", "Carry water and snacks.", "Respect local tribal customs."]
+  },
+  "netarhat-hill-station": {
+    name: "Netarhat",
+    description: "Known as the Queen of Chotanagpur, Netarhat is a hill station famous for its sunrise and sunset points, scenic hills, and lush greenery.",
+    gallery: ["img/Netarhat1.jpg", "img/Netarhat2.jpg"],
+    hotels: [
+      `<a href="https://www.booking.com/hotel/in/netarhat-resort.html" target="_blank">Netarhat Resort</a>`,
+      `<a href="https://www.tripadvisor.in/Hotel_Review-g123456-netarhat-hotel.html" target="_blank">Hill View Lodge</a>`
+    ],
+    activities: ["Sunrise & Sunset Viewpoints", "Nature Walks", "Eco-Tours", "Photography", "Trekking"],
+    bestTime: "October to March: Cool and pleasant weather ideal for sightseeing.",
+    howToReach: {
+      text: "By Road: About 156 km from Ranchi, connected by NH39. Taxis and buses are available.",
+      mapLink: "https://maps.app.goo.gl/xgK5jhxfvYNa95gt6"
+    },
+    localCuisine: ["Dhuska", "Thekua", "Handia (local rice beer)", "Chana Sattu Drink"],
+    festivals: ["Karam Festival", "Sarhul", "Chhath Puja", "Local Cultural Events"],
+    travelTips: ["Carry light woolens during winter months.",
+      "Book hotels in advance during tourist season.",
+      "Start early to enjoy sunrise at Netarhat viewpoint.",
+      "Respect local customs and nature."]
+  },
+
+  "patratu-valley": {
+    name: "Patratu Valley",
+    description: "Beautiful valley with a scenic lake and surrounding hills, perfect for picnics and trekking.",
+    gallery: ["img/Patratu1.jpg", "img/Patratu2.jpg"],
+    hotels: [
+      `<a href="https://www.booking.com/hotel/in/patratu-valley-resort.html" target="_blank">Patratu Lake Resort</a>`,
+      `<a href="https://www.tripadvisor.in/Hotel_Review-g123456-patratu-hotel.html" target="_blank">Hilltop Homestay</a>`
+    ],
+    activities: ["Boating", "Trekking", "Photography", "Eco-Tours", "Nature Walks"],
+    bestTime: "October to March: Pleasant weather and minimal rainfall.",
+     howToReach: {
+    text: "By Road: 40 km from Ranchi, accessible by car or taxi.",
+    mapLink: "https://maps.app.goo.gl/gQkKmdKKUxsb93xA7"
+  },
+    localCuisine: ["Dhuska", "Thekua", "Seasonal local fruits"],
+    festivals: ["Local Cultural Fairs", "Karam Festival"],
+    travelTips: ["Wear comfortable shoes.", "Carry water and snacks.", "Respect local nature and wildlife."]
+  },
+  "baidyanath-temple": {
+    name: "Baidyanath Temple",
+    description: "Ancient temple dedicated to Lord Shiva in Deoghar, a major pilgrimage site.",
+    gallery: ["img/Baidyanath1.jpg", "img/Baidyanath2.jpg"],
+    hotels: [
+      `<a href="https://www.booking.com/hotel/in/deoghar-baidyanath-lodge.html" target="_blank">Baidyanath Stay</a>`,
+      `<a href="https://www.tripadvisor.in/Hotel_Review-g123456-deoghar-hotel.html" target="_blank">Temple View Lodge</a>`
+    ],
+    activities: ["Temple Visit", "Explore Local Markets", "Cultural Tours"],
+    bestTime: "Throughout the Year, especially during festivals.",
+    howToReach: {
+    text: "By Road: Well-connected from nearby cities. By Train: Deoghar Railway Station.",
+    mapLink: "https://maps.app.goo.gl/uGmoheJYEKe2Awfq5"
+  },
+    localCuisine: ["Mishti Doi", "Fish Curry", "Dhuska"],
+    festivals: ["Shravan Mela", "Chhath Puja", "Diwali at Baidyanath Temple"],
+    travelTips: ["Dress modestly.", "Respect local customs.", "Follow temple guidelines."]
+  },
+  "ranchi": {
+  name: "Ranchi",
+  description: "Capital city of Jharkhand, famous for waterfalls, hills, and cultural heritage.",
+  gallery: ["img/Ranchi1.jpg", "img/Ranchi2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/ranchi-city-lodge.html" target="_blank">Ranchi City Lodge</a>`,
+    `<a href="https://www.tripadvisor.in/Hotel_Review-g123456-ranchi-hotel.html" target="_blank">Hill View Lodge Ranchi</a>`
+  ],
+  activities: ["Visit Waterfalls", "Explore Local Markets", "Visit Historical Places", "Cultural Tours", "Eco-Tours"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Air: Birsa Munda Airport, well-connected to major Indian cities.",
+      mapLink: "https://maps.app.goo.gl/wyprSntCLYdfzBsh7"
+    },
+    {
+      text: "By Train: Ranchi Junction, connected to major railway routes.",
+      mapLink: "https://maps.app.goo.gl/hQw9Gqx379Tgypzn8"
+    },
+    {
+      text: "By Road: Accessible via taxi or car from major nearby roads/highways.",
+      mapLink: "https://maps.app.goo.gl/jXfnEeWcdocyijrd6"
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Chana Sattu Drink", "Local Street Foods"],
+  festivals: ["Ranchi Raj Festival", "Chhath Puja", "Local Tribal Fairs"],
+  travelTips: ["Wear comfortable shoes.", "Carry water and snacks.", "Engage respectfully with local communities."]
+},
+
+  "jamshedpur": {
+  name: "Jamshedpur",
+  description: "Industrial city with lush parks, gardens, and wildlife sanctuaries.",
+  gallery: ["img/Jamshedpur1.jpg", "img/Jamshedpur2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/jamshedpur-lodge.html" target="_blank">Jubilee Park Hotel</a>`,
+    `<a href="https://www.tripadvisor.in/Hotel_Review-g123456-jamshedpur-hotel.html" target="_blank">Dalma View Resort</a>`
+  ],
+  activities: ["Visit Dalma Wildlife Sanctuary", "Explore Jubilee Park", "Eco-Tours", "Nature Walks"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Air: Sonari Airport, connected to nearby cities.",
+      mapLink: "https://maps.app.goo.gl/ADco2pHUTHR4Jf7YA"
+    },
+    {
+      text: "By Train: Tatanagar Junction, major railway hub.",
+      mapLink: "https://maps.app.goo.gl/rMAFzpXk6GEcUadYA"
+    },
+    {
+      text: "By Road: Accessible via car or taxi from nearby cities.",
+      mapLink: ""
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Seasonal local fruits"],
+  festivals: ["Local City Festivals", "Cultural Fairs", "Christmas Celebrations at Jubilee Park"],
+  travelTips: ["Carry water and snacks.", "Wear comfortable shoes.", "Respect wildlife in sanctuaries."]
+},
+"trikut-hill": {
+  name: "Trikut Hill",
+  description: "Popular trekking destination offering panoramic views of the surrounding area.",
+  gallery: ["img/Trikut1.jpg", "img/Trikut2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/trikut-lodge.html" target="_blank">Trikut Hills Resort</a>`
+  ],
+  activities: ["Trekking", "Panoramic Views", "Eco-Tours", "Photography"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Road: From Deoghar Bus Stand via car/taxi.",
+      mapLink: "https://maps.app.goo.gl/jfCrSeKcAEMoBMvQ8"
+    },
+    {
+      text: "By Air: From Deoghar Airport.",
+      mapLink: "https://maps.app.goo.gl/13jyh4vVdDwuWfoP6"
+    },
+    {
+      text: "By Train: From Jasidih Junction.",
+      mapLink: "https://maps.app.goo.gl/H6cP3jjTbZoa692g7"
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Seasonal local fruits"],
+  festivals: ["Karam Festival", "Local Fairs"],
+  travelTips: ["Wear comfortable shoes.", "Carry water and snacks.", "Follow eco-friendly trekking practices."]
+},
+"hazaribagh-lake": {
+  name: "Hazaribagh",
+  description: "Peaceful lake surrounded by hills, ideal for boating and bird watching.",
+  gallery: ["img/Hazaribagh1.jpg", "img/Hazaribagh2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/hazaribag-lake-lodge.html" target="_blank">Hazaribag Lake Resort</a>`
+  ],
+  activities: ["Boating", "Bird Watching", "Eco-Tours", "Nature Walks"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Air: From Birsa Munda Airport via car or bus.",
+      mapLink: "https://maps.app.goo.gl/qb9Z2y34nU7dRDCE9"
+    },
+    {
+      text: "By Road: From Ranchi via car or bus.",
+      mapLink: "https://maps.app.goo.gl/4d8MuQSPaZMGRYS4A"
+    },
+    {
+      text: "By Train: From Hazaribagh Town Railway Station.",
+      mapLink: "https://maps.app.goo.gl/v1AWcQSwfczZWnhb7"
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Chana Sattu Drink"],
+  festivals: ["Local Cultural Fairs", "Chhath Puja"],
+  travelTips: ["Carry binoculars for bird watching.", "Respect the environment.", "Avoid littering."]
+},
+"konardam": {
+  name: "Konardam",
+  description: "Scenic spot with panoramic views and ideal for photography and relaxation.",
+  gallery: ["img/Konardam1.jpg", "img/Konardam2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/konardam-resort.html" target="_blank">Konardam Hills Lodge</a>`
+  ],
+  activities: ["Explore Scenic Beauty", "Photography", "Hiking", "Eco-Tours", "Cultural Walks"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Train: From Hazaribagh Town Railway Station.",
+      mapLink: "https://maps.app.goo.gl/ubao4KLA6VK4AcP96"
+    },
+    {
+      text: "By Air: From Birsa Munda Airport.",
+      mapLink: "https://maps.app.goo.gl/dshXsbtZM7vP7Mwi8"
+    },
+    {
+      text: "By Road: Accessible via car or taxi.",
+      mapLink: "https://maps.app.goo.gl/Z7R71B1AkiWzyWUi6"
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Handia (local rice beer)", "Seasonal local fruits"],
+  festivals: ["Karam Festival", "Local Tribal Fairs"],
+  travelTips: ["Wear comfortable shoes.", "Carry water and snacks.", "Follow local guidelines for trekking.", "Avoid disturbing wildlife."]
+},
+"Ghatshila": { 
+  name: "Ghatshila",
+  description: "A picturesque town on the banks of Subarnarekha River, famous for waterfalls, scenic hills, and cultural heritage.",
+  gallery: ["img/Ghatshila1.jpg", "img/Ghatshila2.jpg"],
+  hotels: [
+    `<a href="https://hotelshantighatshila.com/" target="_blank">Hotel Shanti</a>`,
+    `<a href="https://bellavistaghatsila.com/" target="_blank">Bella Vista Resort</a>`
+  ],
+  activities: ["Riverbank Walks", "Trekking", "Picnics", "Sightseeing", "Photography"],
+  bestTime: "October to March: Cool and pleasant weather for sightseeing.",
+  howToReach: [
+    {
+      text: "By Train: Ghatshila Railway Station / From Jamshedpur to Ghatshila Railway Station",
+      mapLink: [
+        "https://maps.app.goo.gl/9mmviZ2QUshgfiif7",
+        "https://maps.app.goo.gl/QgnEbWPTwrga2uRs5"
+      ]
+    },
+    {
+      text: "By Road: From Jamshedpur",
+      mapLink: ["https://maps.app.goo.gl/np6BARy1V5GE7Puc7"]
+    },
+    {
+      text: "By Air: From Birsa Munda Airport via Jamshedpur by car",
+      mapLink: ["https://maps.app.goo.gl/AouTQZQx18zX4jZH7"]
+    }
+  ],
+  localCuisine: ["Litti Chokha", "Dhuska", "Thekua", "Handia (local rice beer)"],
+  festivals: ["Chhath Puja at Subarnarekha", "Durga Puja", "Karam Festival"],
+  travelTips: [
+    "Carry mosquito repellents if staying near riverbanks.",
+    "Hire local guides for trekking and sightseeing.",
+    "Avoid riverbanks during monsoon due to high currents.",
+    "Try local tribal handicrafts available in markets."
+  ]
+},
+
+  "burudi-lake": {
+  name: "Gharchala Burudi Lake",
+  description: "Serene lake with picnic spots and boating facilities, surrounded by hills.",
+  gallery: ["img/Burudi1.jpg", "img/Burudi2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/burudi-lake-resort.html" target="_blank">Burudi Lake Resort</a>`
+  ],
+  activities: ["Boating", "Picnics", "Nature Walks", "Eco-Tours", "Photography"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Train: From Ghatshila Railway Station / From Jamshedpur to Ghatshila Railway Station",
+      mapLink: ["https://maps.app.goo.gl/9mmviZ2QUshgfiif7", "https://maps.app.goo.gl/QgnEbWPTwrga2uRs5"]
+    },
+    {
+      text: "By Road: From Ghatshila Railway Station",
+      mapLink: ["https://maps.app.goo.gl/jBBvMrSanW6aH4qv7"]
+    },
+    {
+      text: "By Air: From Birsa Munda Airport via Jamshedpur by car",
+      mapLink: ["https://maps.app.goo.gl/AouTQZQx18zX4jZH7"]
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Handia", "Local Seasonal Vegetables"],
+  festivals: ["Karam Festival", "Chhath Puja", "Local Tribal Fairs"],
+  travelTips: ["Wear comfortable shoes.", "Carry water and snacks.", "Keep the lake surroundings clean.", "Engage with local guides for eco-tourism activities."]
+},
+
+"parasnath-hills": {
+  name: "Parasnath Hills",
+  description: "A serene hilly region, perfect for trekking enthusiasts and nature lovers seeking panoramic views.",
+  gallery: ["img/Parasnath1.jpg", "img/Parasnath2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/prashanth-hills-lodge.html" target="_blank">Prashanth Hills Resort</a>`
+  ],
+  activities: ["Trekking", "Panoramic Views", "Photography", "Eco-Tours", "Bird Watching"],
+  bestTime: "October to March: Pleasant weather with minimal rainfall, ideal for trekking.",
+  howToReach: [
+    {
+      text: "By Train: Parasnath Railway Station",
+      mapLink: ["https://maps.app.goo.gl/aNSZVp9LwXXMjhcdA"]
+    },
+    {
+      text: "By Road: From Ranchi via car or taxi",
+      mapLink: ["https://maps.app.goo.gl/9n4QJSfomkVqyGhKA"]
+    },
+    {
+      text: "By Air: Fly to Birsa Munda Airport, then drive by car/taxi",
+      mapLink: ["https://maps.app.goo.gl/1Vv12NY6id2VNaZq7"]
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Seasonal Local Fruits", "Chana Sattu Drink"],
+  festivals: ["Karam Festival", "Local Fairs", "Chhath Puja"],
+  travelTips: [
+    "Wear comfortable shoes suitable for trekking.",
+    "Carry water, snacks, and light woolens during cooler months.",
+    "Respect the natural surroundings and local tribal communities.",
+    "Plan your visit during October to March for the best experience."
+  ]
+},
+"messenger-dam": {
+  name: "Messenger Dam",
+  description: "A serene dam surrounded by scenic landscapes, perfect for photography, nature walks, and exploration.",
+  gallery: ["img/Messenger1.jpg", "img/Messenger2.jpg"],
+  hotels: [
+    `<a href="https://www.booking.com/hotel/in/messenger-dam-lodge.html" target="_blank">Messenger Dam Resort</a>`
+  ],
+  activities: ["Explore the Dam", "Photography", "Nature Walks", "Eco-Tours"],
+  bestTime: "October to March: Pleasant weather and minimal rainfall.",
+  howToReach: [
+    {
+      text: "By Road: From Dumka (24 km) / Suri, West Bengal (45 km) hire a taxi or local transport / From Kolkata (~225 km) drive directly (4-5 hours)",
+      mapLink: [
+        "https://maps.app.goo.gl/GDPtLwwgdYb1twbz8",
+        "https://maps.app.goo.gl/tWhVunmCYYMrUoGU7",
+        ""
+      ]
+    },
+    {
+      text: "By Train: Dumka (DUMK, 35 km) / Jasidih / Sainthia (West Bengal) with connecting transport to the dam",
+      mapLink: [
+        "https://maps.app.goo.gl/hNHCMS9bN4ZznQn36",
+        "https://maps.app.goo.gl/ndx7Q8GTaFWhrqpc8",
+        "https://maps.app.goo.gl/EcTL2mkvH4MRS1Nd6"
+      ]
+    },
+    {
+      text: "By Air: Deoghar (DGH, ~80 km) / Ranchi (IXR, ~260 km) take a taxi to the dam",
+      mapLink: [
+        "https://maps.app.goo.gl/GyUKsUvxDtXDDCCe6",
+        "https://maps.app.goo.gl/2Vd6D52mKMm5QrAX6"
+      ]
+    }
+  ],
+  localCuisine: ["Dhuska", "Thekua", "Seasonal Local Fruits", "Handia"],
+  festivals: ["Karam Festival", "Local Fairs"],
+  travelTips: [
+    "Wear comfortable shoes for walking and exploring.",
+    "Carry water, snacks, and sun protection.",
+    "Respect local flora and fauna, and avoid littering.",
+    "Hire local guides if unfamiliar with the area for safer travel."
+  ]
+},
+
+};
+const params = new URLSearchParams(window.location.search);
+const place = params.get('place'); 
+
+if(place && destinations[place]) {
+  const dest = destinations[place];
+  document.getElementById('dest-name').textContent = dest.name;
+  document.getElementById('dest-description').textContent = dest.description;
+  document.getElementById('dest-gallery').innerHTML = dest.gallery.map(img => `<img src="${img}" alt="${dest.name}">`).join('');
+  document.getElementById('dest-hotels').innerHTML = dest.hotels.map(h => `<li>${h}</li>`).join('');
+  document.getElementById('dest-activities').innerHTML = dest.activities.map(a => `<li>${a}</li>`).join('');
+  document.getElementById('dest-besttime').innerHTML = `<li>${dest.bestTime}</li>`;
+  
+
+if (Array.isArray(dest.howToReach)) {
+  document.getElementById('dest-reach').innerHTML = dest.howToReach.map(hr => {
+    // Handle multiple map links for single text
+    if (Array.isArray(hr.mapLink)) {
+      const parts = hr.text.split(' / ');
+      return `<li>${parts.map((part, i) =>
+        `<span class="clickable" style="margin-right:5px;" onclick="window.open('${hr.mapLink[i]}','_blank')">${part}</span>`
+      ).join(' / ')}</li>`;
+    } else if (hr.mapLink && hr.mapLink !== "") {
+      return `<li class="clickable" onclick="window.open('${hr.mapLink}','_blank')">${hr.text}</li>`;
+    } else {
+      return `<li>${hr.text}</li>`;
+    }
+  }).join('');
+} else if (typeof dest.howToReach === "object") {
+  if (Array.isArray(dest.howToReach.mapLink)) {
+    const parts = dest.howToReach.text.split(' / ');
+    document.getElementById('dest-reach').innerHTML =
+      `<li>${parts.map((part, i) =>
+        `<span class="clickable" style="margin-right:5px;" onclick="window.open('${dest.howToReach.mapLink[i]}','_blank')">${part}</span>`
+      ).join(' / ')}</li>`;
+  } else {
+    document.getElementById('dest-reach').innerHTML =
+      `<li class="clickable" onclick="window.open('${dest.howToReach.mapLink}','_blank')">${dest.howToReach.text}</li>`;
+  }
+} else {
+  document.getElementById('dest-reach').innerHTML =
+    `<li>${dest.howToReach}</li>`;
+}
+
+
+  document.getElementById('dest-cuisine').innerHTML = dest.localCuisine.map(i => `<li>${i}</li>`).join('');
+  document.getElementById('dest-festivals').innerHTML = dest.festivals.map(i => `<li>${i}</li>`).join('');
+  document.getElementById('dest-tips-card').innerHTML = dest.travelTips.map(t => `<li>${t}</li>`).join('');
+} else {
+  document.getElementById('destination-container').textContent = "Destination not found!";
+}
+</script>
+</body>
+</html>

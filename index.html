@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Plan your perfect trip to Jharkhand with JharkhandTrails. Find top destinations, hotels, flights, and personalized travel plans.">
+  <title>JharkhandTrails • Your Travel Partner</title>
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Login Check -->
+  <script>
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+      window.location.href = 'login.html';
+    }
+  </script>
+
+  <!-- Google Translate -->
+  <script src="https://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+  <script>
+    function loadGoogleTranslate() {
+      if (!window.google || !google.translate) return;
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'hi,bn,ta,te,ml,kn,pa,gu,mr,or,ur,ne,fr,de,es,zh-CN,ja,ko,ru,ar',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'myid');
+    }
+  </script>
+
+  <style>
+    #myid {
+      float: right;
+      margin: 8px 0 8px 12px;
+    }
+    /* Wrap Google widget with a custom pill */
+    .translate-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid #e9ecef;
+    }
+    .translate-wrapper .globe {
+      font-size: 14px;
+    }
+    .goog-te-gadget {
+      font-size: 0 !important;
+      line-height: 0;
+    }
+    /* Hide Google branding and logo */
+    .goog-te-gadget img { display: none !important; }
+    .goog-te-gadget .goog-te-gadget-simple { background: none !important; border: none !important; }
+    .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value { color: var(--primary-dark) !important; }
+    .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value:before { content: "🌐"; margin-right: 6px; }
+    .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value:after { content: "▼"; margin-left: 6px; font-size: 10px; }
+    .goog-te-combo {
+      border: none;
+      background: transparent;
+      font-size: 12px !important;
+      font-weight: 600;
+      padding: 2px 16px 2px 6px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='orange' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right center;
+      cursor: pointer;
+    }
+    /* Hide Google's dropdown arrow and replace with custom */
+    .goog-te-combo option { color: var(--text) !important; }
+    .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span { display: none !important; }
+    .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value { 
+      background: none !important; 
+      border: none !important; 
+      padding: 4px 8px !important;
+      font-size: 12px !important;
+    }
+    /* Hide Google banner and frame bumping the layout */
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0 !important; }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="navbar header-section flat-style">
+    <div class="nav-left">
+      <img src="img/logo.png" alt="Logo" />
+      <h1>JharkhandTrails</h1>
+    </div>
+    <div class="nav-right">
+      <a href="#destinations">Destinations</a>
+      <a href="hotels.html">Hotels</a>
+      <a href="VOC/welcome.html" target="_blank">Flights</a>
+      <a href="#services" class="nav-link">Booking</a>
+      <button id="logout-btn" aria-label="Logout" style="cursor:pointer; background:#ff6600; color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:bold;">Logout</button>
+      <div id="myid" style="text-align: right; margin-right: 20px;"></div>
+    </div>
+  </header>
+
+
+  <!-- Hero -->
+  <section class="hero hero-section flat-style">
+    <div class="container hero-content hero-flex">
+      <div class="hero-text">
+        <h1>Plan Your Perfect Trip in Jharkhand</h1>
+        <p>Explore Jharkhand’s best destinations: majestic waterfalls, lush forests, wildlife sanctuaries, tribal culture, and serene hills—all curated for your perfect journey.</p>
+        <a href="#newsletter" class="btn-cta">Subscribe for Your Next Trip →</a>
+      </div>
+      <div class="hero-image">
+        <img src="img/Adventurer.png" alt="Adventurer" />
+      </div>
+    </div>
+  </section>
+
+      <!-- Top Destinations -->
+      <section id="destinations" class="destinations top-destinations-section flat-style">
+        <div class="container">
+          <h2>Top Destinations</h2>
+          <div class="scroll-container" id="scrollDest">
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Dassam.jpg" alt="Dassam Falls" />
+          <a href="destination.html?place=dassam-falls" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Dassam Falls
+          <span class="weather-widget" data-city="Tarub">Loading...</span>
+        </h3>
+        <p>The Falls are 144 feet in height, formed by the waterflow of the Kanchi River</p>
+        <div class="card-footer">
+          <span class="rating">★★★★★</span>
+          <span class="price">₹2,500/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/netarhat.jpg" alt="Netarhat Hill Station" />
+          <a href="destination.html?place=netarhat-hill-station" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Netarhat Hill Station
+          <span class="weather-widget" data-city="Netarhat">Loading...</span>
+        </h3>
+        <p>Known as the 'Queen of Chotanagpur', ideal for sunrise/sunset views and trekking</p>
+        <div class="card-footer">
+          <span class="rating">★★★★</span>
+          <span class="price">₹2,000/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/patratu valley.jpg" alt="Patratu Valley" />
+          <a href="destination.html?place=patratu-valley" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Patratu Valley
+          <span class="weather-widget" data-city="Ranchi">Loading...</span>
+        </h3>
+        <p>Beautiful valley with a scenic lake and surrounding hills, perfect for picnics and trekking</p>
+        <div class="card-footer">
+          <span class="rating">★★★★★</span>
+          <span class="price">₹1,700/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Baidyanath.jpg" alt="Baidyanath Temple" />
+          <a href="destination.html?place=baidyanath-temple" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Baidyanath Temple
+          <span class="weather-widget" data-city="Deoghar">Loading...</span>
+        </h3>
+        <p>Iconic religious site with 22 temples including one of the 12 Jyotirlinga shrines honouring Shiva</p>
+        <div class="card-footer">
+          <span class="rating">★★★★</span>
+          <span class="price">₹1,500/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Rachi.jpg" alt="Ranchi" />
+          <a href="destination.html?place=ranchi" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Ranchi
+          <span class="weather-widget" data-city="Ranchi">Loading...</span>
+        </h3>
+        <p>Capital city of Jharkhand, famous for waterfalls, hills, and cultural heritage</p>
+        <div class="card-footer">
+          <span class="rating">★★★★</span>
+          <span class="price">₹1,200/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Jamshedpur.jpg" alt="Jamshedpur" />
+          <a href="destination.html?place=jamshedpur" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Jamshedpur
+          <span class="weather-widget" data-city="Jamshedpur">Loading...</span>
+        </h3>
+        <p>Industrial city with lush parks, gardens, and wildlife sanctuaries</p>
+        <div class="card-footer">
+          <span class="rating">★★★</span>
+          <span class="price">₹1,100/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Trikutpahar.jpg" alt="Trikut Hill" />
+          <a href="destination.html?place=trikut-hill" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Trikut Hill
+          <span class="weather-widget" data-city="Mohanpur">Loading...</span>
+        </h3>
+        <p>Popular trekking destination offering panoramic views of the surrounding area</p>
+        <div class="card-footer">
+          <span class="rating">★★★</span>
+          <span class="price">₹900/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Hazaribagh.jpg" alt="Hazaribagh" />
+          <a href="destination.html?place=hazaribagh-lake" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Hazaribagh
+          <span class="weather-widget" data-city="Hazaribagh">Loading...</span>
+        </h3>
+        <p>Peaceful lake surrounded by hills, ideal for boating and bird watching</p>
+        <div class="card-footer">
+          <span class="rating">★★★</span>
+          <span class="price">₹1,400/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/konarDam.jpg" alt="Konar Dam" />
+          <a href="destination.html?place=konardam" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Konar Dam
+          <span class="weather-widget" data-city="Bokaro">Loading...</span>
+        </h3>
+        <p>Second of the four multi-purpose dams included in the first phase of the Damodar Valley Corporation</p>
+        <div class="card-footer">
+          <span class="rating">★★★★</span>
+          <span class="price">₹1,300/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Ghatshila.jpg" alt="Ghatshila" />
+          <a href="destination.html?place=Ghatshila" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Ghatshila
+          <span class="weather-widget" data-city="Jamshedpur">Loading...</span>
+        </h3>
+        <p>Tranquil lake surrounded by pine forests</p>
+        <div class="card-footer">
+          <span class="rating">★★★</span>
+          <span class="price">₹1,000/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/Burudi.jpg" alt="Burudi Lake" />
+          <a href="destination.html?place=burudi-lake" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Burudi Lake
+          <span class="weather-widget" data-city="Dhanbad">Loading...</span>
+        </h3>
+        <p>Formed at the Burudi Dam on the River Subernarekha</p>
+        <div class="card-footer">
+          <span class="rating">★★★★</span>
+          <span class="price">₹1,800/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/parasnathHills.jpg" alt="Parasnath Hills" />
+          <a href="destination.html?place=parasnath-hills" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Parasnath Hills
+          <span class="weather-widget" data-city="Deoghar">Loading...</span>
+        </h3>
+        <p>Parasnath Hill is a mountain peak in the Parasnath hill range, sacred to Jain pilgrims</p>
+        <div class="card-footer">
+          <span class="rating">★★★★</span>
+          <span class="price">₹1,500/night</span>
+        </div>
+      </div>
+
+      <div class="card dest-card">
+        <div class="image-wrapper">
+          <img src="img/MessangerDam.jpg" alt="Messenger Dam" />
+          <a href="destination.html?place=messenger-dam" class="arrow-link">
+            <img src="img/arrow.png" alt="Go to page" />
+          </a>
+        </div>
+        <h3>
+          Messenger Dam
+          <span class="weather-widget" data-city="Bokaro">Loading...</span>
+        </h3>
+        <p>Hydropower generating dam over the Mayurakshi River</p>
+        <div class="card-footer">
+          <span class="rating">★★★</span>
+          <span class="price">₹1,200/night</span>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+  <section class="testimonials travelers-say-section flat-style">
+    <div class="container side-by-side-wrapper">
+      <!-- Left: Testimonials -->
+      <div class="testimonial-section">
+        <h2 class="testimonial-heading">Hear From Our Happy Travelers</h2>
+        <div class="testimonials-carousel">
+          <button class="carousel-arrow prev" aria-label="Previous testimonial">&#10094;</button>
+
+          <div class="testi-grid-wrapper">
+              <div class="testi-grid">
+                  <!-- Testimonial Cards -->
+                  <div class="testi-card active">
+                      <img src="img/testimonial1.jpg" alt="Riya" />
+                      <blockquote>“Dassam Falls was breathtaking! Our trip was so smooth thanks to this website—truly unforgettable.”</blockquote>
+                      <cite>— Riya, Kolkata</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial2.jpg" alt="Arjun" />
+                      <blockquote>“Exploring Netarhat Hill Station was a dream! The guidance here made it comfortable and memorable.”</blockquote>
+                      <cite>— Arjun, Siliguri</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial3.jpg" alt="Sunita" />
+                      <blockquote>“Patratu Valley’s beauty left us amazed! The website helped plan our journey perfectly.”</blockquote>
+                      <cite>— Sunita, Howrah</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial4.jpg" alt="Rahul" />
+                      <blockquote>“Baidyanath Temple visit was smooth and memorable. Everything from timings to travel tips was spot on!”</blockquote>
+                      <cite>— Rahul, Durgapur</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial5.jpg" alt="Anita" />
+                      <blockquote>“Our city tour of Ranchi became so easy and enjoyable—highly recommend this platform for first-time visitors.”</blockquote>
+                      <cite>— Anita, Bardhaman</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial6.jpg" alt="Sourav" />
+                      <blockquote>“Jamshedpur’s gardens and cultural spots were fantastic! Planning through this site made everything stress-free.”</blockquote>
+                      <cite>— Sourav, Kolkata</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial7.jpg" alt="Meera" />
+                      <blockquote>“Trikut Hill hike was thrilling and safe thanks to the website’s detailed info and tips.”</blockquote>
+                      <cite>— Meera, Asansol</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial8.jpg" alt="Amit" />
+                      <blockquote>“Hazirabag Lake was peaceful and picturesque. This platform made the visit so easy and enjoyable.”</blockquote>
+                      <cite>— Amit, Siliguri</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial9.jpg" alt="Priya" />
+                      <blockquote>“Burudi Lake trip was relaxing and perfect for family time. Thanks for the amazing travel guidance!”</blockquote>
+                      <cite>— Priya, Jalpaiguri</cite>
+                  </div>
+                  <div class="testi-card">
+                      <img src="img/testimonial10.jpg" alt="Dev" />
+                      <blockquote>“Messenger Dam visit turned out to be so smooth and memorable. Definitely using this site for future Jharkhand trips!”</blockquote>
+                      <cite>— Dev, Kolkata</cite>
+                  </div>
+
+              <!-- New Testimonials for added destinations -->
+              <div class="testi-card">
+                <img src="img/testimonial11.jpg" alt="Kabir" />
+                <blockquote>“Trekking to Sandakphu gave me breathtaking Himalayan views!”</blockquote>
+                <cite>— Kabir, Darjeeling</cite>
+              </div>
+              <div class="testi-card">
+                <img src="img/testimonial12.jpg" alt="Nisha" />
+                <blockquote>“Samsing’s tea gardens were a perfect peaceful getaway.”</blockquote>
+                <cite>— Nisha, Siliguri</cite>
+              </div>
+              <div class="testi-card">
+                <img src="img/testimonial13.jpg" alt="Raj" />
+                <blockquote>“The wildlife at Buxa Sanctuary amazed us.”</blockquote>
+                <cite>— Raj, Jalpaiguri</cite>
+              </div>
+              <div class="testi-card">
+                <img src="img/testimonial14.jpg" alt="Karan" />
+                <blockquote>“Lothian Island’s beaches were untouched and beautiful.”</blockquote>
+                <cite>— Karan, Kolkata</cite>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-arrow next" aria-label="Next testimonial">&#10095;</button>
+          <div class="carousel-dots"></div>
+        </div>
+      </div>
+
+<!-- Right: Events -->
+<div class="events-section">
+  <h2>Upcoming Festivals & Events</h2>
+  <div class="events-scroll-container">
+    <div class="events-card">
+      <strong>Karam Festival:</strong> Sept 26, 2025 – Tribal harvest festival, celebrated in Ranchi, Netarhat & Patratu
+    </div>
+    <div class="events-card">
+      <strong>Seva Pakhwada:</strong> Sept 17 – Oct 2, 2025, Ranchi – Community service programs & eco-activities
+    </div>
+    <div class="events-card">
+      <strong>Chhath Puja:</strong> Oct 27, 2025 – Grand celebrations at Baidyanath Temple (Deoghar), Ranchi lakes & Hazaribag Lake
+    </div>
+    <div class="events-card">
+      <strong>Jharkhand Pedicon 2025:</strong> Nov 7 – Nov 9, 2025, Ranchi – State Pediatric Conference
+    </div>
+    <div class="events-card">
+      <strong>Jharkhand State Olympiad 2025:</strong> Nov (2nd Week), Ranchi – Inter-district cultural & academic competitions
+    </div>
+    <div class="events-card">
+      <strong>Eco-Tourism Fair:</strong> Nov 15 – Nov 17, 2025, Netarhat Hill Station – Tribal crafts, forest walks & folk dances
+    </div>
+    <div class="events-card">
+      <strong>Patratu Valley Adventure Festival:</strong> Dec 5 – Dec 7, 2025 – Cycling, trekking, and boating
+    </div>
+    <div class="events-card">
+      <strong>Burudi Lake Tribal Fair:</strong> Dec 12 – Dec 14, 2025 – Local folk songs, tribal cuisine & handicrafts
+    </div>
+    <div class="events-card">
+      <strong>Tusu Parab (Makar Festival):</strong> Jan 14, 2026 – Celebrated widely in Jamshedpur, Hazaribag & Konardam region
+    </div>
+    <div class="events-card">
+      <strong>Sarhul Festival:</strong> March 2026 – Traditional spring festival in Ranchi, Trikut Hill & surrounding villages
+    </div>
+  </div>
+</div>
+
+  </section>
+
+<!-- Services -->
+<section id="services" class="services our-services-section flat-style">
+    <div class="container">
+      <h2>Travel Made Easy</h2>
+      <div class="services-grid">
+        <div class="service">
+          <span class="emoji">✈️</span>
+          <h3><a href="VOC/welcome.html" style="text-decoration: none; color: inherit;">Best Flights</a></h3>
+          <p>Find the cheapest fares and hassle-free bookings.</p>
+        </div>
+        <div class="service">
+          <span class="emoji">🏨</span>
+          <h3><a href="hotels.html" style="text-decoration: none; color: inherit;">Best Hotels</a></h3>
+          <p>Handpicked stays from cozy homestays to luxury hotels.</p>
+        </div>
+        <div class="service">
+          <span class="emoji">📋</span>
+          <h3><a href="planning.html" style="text-decoration: none; color: inherit;">Travel Planning</a></h3>
+          <p>Custom itineraries, expert tips, and 24/7 support for every traveler.</p>
+        </div>
+      </div>
+    </div>
+</section>
+  <!-- Newsletter -->
+    <section id="newsletter" class="newsletter dreaming-next-trip-section flat-style">
+      <div class="container news-inner">
+        <h2>Ready for Your Next Adventure?</h2>
+        <p>Sign up to get exclusive travel tips, deals, and curated itineraries straight to your inbox.</p>
+
+        <form id="subscribe-form">
+          <input type="email" id="email" placeholder="Enter your email" required />
+          <button type="submit" class="btn-solid">Subscribe</button>
+        </form>
+        <p id="subscription-msg" style="margin-top:10px; color:green; display:none;">Thank you for subscribing!</p>
+      </div>
+    </section>
+
+
+  <!-- Footer -->
+  <footer class="site-footer footer-section flat-style">
+    <div class="container footer-top">
+      <div class="footer-about">
+        <img src="img/logo.png" alt="JharkhandTrails" />
+        <h3>JharkhandTrails</h3>
+        <p>Your trusted Jharkhand travel experts.</p>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="#">Help / FAQ</a>
+          <a href="#">Press</a>
+          <a href="#">Customer Service</a>
+          <a href="#">Affiliates</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a href="#">Travel Guides</a>
+          <a href="#">Local Insights</a>
+          <a href="#">Adventure Tips</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <p>© 2025 JharkhandTrails. All rights reserved.</p>
+      <div class="social-icons">
+        <a href="#"><img src="img/instagram.svg" alt="Instagram" /></a>
+        <a href="#"><img src="img/x.svg" alt="Twitter" /></a>
+        <a href="#"><img src="img/facebook.svg" alt="Facebook" /></a>
+        <a href="#"><img src="img/whatsapp.svg" alt="WhatsApp" /></a>
+      </div>
+    </div>
+  </footer>
+
+<!-- 💱 Toggle Currency Converter Button -->
+<button id="toggle-converter" class="converter-btn">💱</button>
+
+<div id="currency-converter">
+  <div class="cc-header">Currency Converter</div>
+  <div class="cc-body">
+    <label for="from-currency">From:</label>
+    <select id="from-currency">
+      <option value="INR" selected>INR</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+    </select>
+
+    <label for="to-currency">To:</label>
+    <select id="to-currency">
+      <option value="USD" selected>USD</option>
+      <option value="INR">INR</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+    </select>
+
+    <label for="amount" id="amount-label">Amount:</label>
+    <input type="number" id="amount" value="1" min="0" />
+    <div id="conversion-result" style="display:none; font-weight: bold; margin-top: 5px;"></div>
+
+    <button id="convert-btn" class="btn-solid">Convert</button>
+  </div>
+</div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top" style="display:none;">
+    <img src="img/up-arrow.svg" alt="Up arrow" />
+  </button>
+
+  <!-- 💬 Chatbot Toggle Button -->
+  <button id="toggle-chatbot" class="chatbot-btn" aria-label="Open chat">💬</button>
+
+  <!-- Chatbot Panel -->
+  <div id="chatbot" class="chatbot-panel" aria-live="polite" aria-label="Travel assistant chat" role="dialog">
+    <div class="chatbot-header">Travel Assistant</div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-input-row">
+      <input id="chatbot-input" type="text" placeholder="Ask about places, hotels..." autocomplete="off" />
+      <button id="chatbot-send" class="btn-solid" aria-label="Send">Send</button>
+    </div>
+  </div>
+
+<script src="js/main.js" defer></script>
+<script>
+const logoutBtn = document.getElementById('logout-btn');
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login.html';
+  });
+}
+</script>
+</body>
+</html>
+

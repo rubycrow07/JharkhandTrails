@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment</title>
+  <link rel="stylesheet" href="style4.css">
+<style>
+  /* Container for the buttons */
+  .btn-container {
+    display: flex;
+    justify-content: space-between; /* Left: Pay Now, Right: Back */
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  /* Button styling */
+  .btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #7b2ff7, #f107a3);
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    background: linear-gradient(135deg, #f107a3, #7b2ff7);
+    transform: scale(1.05);
+  }
+
+  /* Back button styled as lighter version of primary button */
+  .back-btn {
+    background: linear-gradient(135deg, rgba(123, 47, 247, 0.6), rgba(241, 7, 163, 0.6));
+    color: #fff;
+  }
+
+  .back-btn:hover {
+    background: linear-gradient(135deg, rgba(241, 7, 163, 0.6), rgba(123, 47, 247, 0.6));
+  }
+</style>
+
+</head>
+<body>
+  <div class="container">
+    <div id="payment-info"></div>
+
+    <form id="payment-form">
+      <label for="card-number">Card Number:</label>
+      <input type="text" id="card-number" maxlength="16" required />
+
+      <label for="expiry-date">Expiry Date:</label>
+      <input type="month" id="expiry-date" required />
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" maxlength="4" required />
+
+      <div class="btn-container">
+        <button type="submit" class="btn">Pay Now</button>
+        <a href="booking.html" class="btn back-btn">← Back to Booking</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="script4.js"></script>
+</body>
+</html>
