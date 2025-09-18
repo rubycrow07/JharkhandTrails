@@ -7,12 +7,12 @@
 <link rel="icon" type="image/png" href="img/logo.png" />
 <link rel="stylesheet" href="css/style.css">
 <style>
-/* ---- Existing styles ---- */
-body {
+
+  body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #8ac6ff, #d9bcf7);
+  background: linear-gradient(135deg, #7fbfff, #bfa7f5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,13 +22,13 @@ body {
 .glass-card {
   width: 95%;
   max-width: 1000px;
-  background-color: rgba(255,255,255,0.25);
+  background-color: rgba(255,255,255,0.35); 
   backdrop-filter: blur(25px) saturate(180%);
   border-radius: 25px;
   border: 1px solid rgba(255,255,255,0.4);
   box-shadow: 0 10px 40px rgba(0,0,0,0.2);
   padding: 2rem;
-  color: #fff;
+  color: #f0f0f0; 
   animation: fadeIn 0.6s ease-out;
   position: relative;
 }
@@ -67,16 +67,18 @@ h1, h3, h4 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
   letter-spacing: 1px;
-  color: #ffeaa7;
+  color: #ffeb99; 
 }
 
 #dest-description {
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
-  color: #f7f1e3;
+  color: #fff8d7; 
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3); 
   line-height: 1.5;
 }
+
 
 #dest-gallery {
   display: flex;
@@ -99,18 +101,16 @@ h1, h3, h4 {
   transform: scale(1.08);
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
-/* Only affect clickable How to Reach items */
-/* Only affect clickable How to Reach items */
 #dest-reach .clickable {
   cursor: pointer;
-  color: #fff;               /* normal text color */
-  text-decoration: none;     /* no underline by default */
+  color: #fff;               
+  text-decoration: none;     
   transition: all 0.2s ease;
 }
 
 #dest-reach .clickable:hover {
-  color: #1e90ff;            /* blue on hover */
-  text-decoration: underline; /* underline on hover */
+  color: #1e90ff;            
+  text-decoration: underline; 
 }
 
 ul {
@@ -127,7 +127,7 @@ ul li {
   background: rgba(0,0,0,0.25);
   border-radius: 12px;
   transition: background 0.3s ease;
-  color: #fff;
+  color: #f0f0f0;
   font-weight: 500;
   cursor: pointer;
 }
@@ -173,7 +173,7 @@ a:hover {
 
 .info-card h4 {
   margin-bottom: 0.8rem;
-  color: #ffeaa7;
+  color:  #ffd97d;
   text-align: center;
 }
 
@@ -594,7 +594,7 @@ if(place && destinations[place]) {
 
 if (Array.isArray(dest.howToReach)) {
   document.getElementById('dest-reach').innerHTML = dest.howToReach.map(hr => {
-    // Handle multiple map links for single text
+
     if (Array.isArray(hr.mapLink)) {
       const parts = hr.text.split(' / ');
       return `<li>${parts.map((part, i) =>
@@ -621,7 +621,6 @@ if (Array.isArray(dest.howToReach)) {
   document.getElementById('dest-reach').innerHTML =
     `<li>${dest.howToReach}</li>`;
 }
-
 
   document.getElementById('dest-cuisine').innerHTML = dest.localCuisine.map(i => `<li>${i}</li>`).join('');
   document.getElementById('dest-festivals').innerHTML = dest.festivals.map(i => `<li>${i}</li>`).join('');
