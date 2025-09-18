@@ -256,7 +256,8 @@ h2 {
 
 /* Testimonials Section */
 .travelers-say-section {
-  background-color: var(--testimonials-bg);
+  background-color: #e0f7ff; 
+  transition: background 0.3s ease;
   padding: 0rem 0;
   margin-bottom: 0;
   user-select: none;
@@ -362,7 +363,6 @@ h2 {
   transform: translateY(-50%);
   z-index: 10;
 }
-
 
 .carousel-arrow:hover {
   background: var(--primary-dark);
@@ -565,7 +565,6 @@ h2 {
     margin-top: 1rem;
   }
 }
-
 /* Hero responsiveness */
 @media (max-width: 900px) {
   .hero-content {
@@ -723,7 +722,6 @@ h2 {
   max-height: 160px;      
   overflow-y: auto;      
   padding-right: 5px;     
-
 }
 
 .events-scroll-container::-webkit-scrollbar {
@@ -735,7 +733,6 @@ h2 {
   border-radius: 3px;
 }
 
-/* Individual event cards */
 .events-card {
   margin-bottom: 10px;
   line-height: 1.5;
