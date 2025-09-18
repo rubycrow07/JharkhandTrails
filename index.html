@@ -35,6 +35,7 @@
       float: right;
       margin: 8px 0 8px 12px;
     }
+    /* Wrap Google widget with a custom pill */
     .translate-wrapper {
       display: inline-flex;
       align-items: center;
@@ -52,6 +53,7 @@
       font-size: 0 !important;
       line-height: 0;
     }
+    /* Hide Google branding and logo */
     .goog-te-gadget img { display: none !important; }
     .goog-te-gadget .goog-te-gadget-simple { background: none !important; border: none !important; }
     .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value { color: var(--primary-dark) !important; }
@@ -71,6 +73,7 @@
       background-position: right center;
       cursor: pointer;
     }
+    /* Hide Google's dropdown arrow and replace with custom */
     .goog-te-combo option { color: var(--text) !important; }
     .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span { display: none !important; }
     .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value { 
@@ -79,6 +82,7 @@
       padding: 4px 8px !important;
       font-size: 12px !important;
     }
+    /* Hide Google banner and frame bumping the layout */
     .goog-te-banner-frame.skiptranslate { display: none !important; }
     body { top: 0 !important; }
   </style>
@@ -421,6 +425,8 @@
                       <blockquote>“Messenger Dam visit turned out to be so smooth and memorable. Definitely using this site for future Jharkhand trips!”</blockquote>
                       <cite>— Dev, Kolkata</cite>
                   </div>
+
+              <!-- New Testimonials for added destinations -->
               <div class="testi-card">
                 <img src="img/testimonial11.jpg" alt="Kabir" />
                 <blockquote>“Trekking to Sandakphu gave me breathtaking Himalayan views!”</blockquote>
@@ -510,18 +516,18 @@
       </div>
     </div>
 </section>
-  <!-- Newsletter -->
-    <section id="newsletter" class="newsletter dreaming-next-trip-section flat-style">
-      <div class="container news-inner">
-        <h2>Next Adventure Awaits!</h2>
-        <p>Tips, deals & itineraries, straight to your inbox.</p>
-        <form id="subscribe-form">
-          <input type="email" placeholder="Your email" required />
-          <button type="submit" class="btn-solid">Subscribe</button>
-        </form>
-        <p id="subscription-msg" style="margin-top:10px; color:green; display:none;">Thanks for joining!</p>
-      </div>
-    </section>
+    <!-- Newsletter -->
+  <section id="newsletter" class="newsletter dreaming-next-trip-section flat-style">
+    <div class="container news-inner">
+      <h2>Next Adventure Awaits!</h2>
+      <p>Tips, deals & itineraries, straight to your inbox.</p>
+      <form id="subscribe-form">
+        <input id="email" type="email" placeholder="Your email" required />
+        <button type="submit" class="btn-solid">Subscribe</button>
+      </form>
+      <p id="subscription-msg" style="margin-top:10px; color:green; display:none;">Thanks for joining!</p>
+    </div>
+  </section>
 
 
   <!-- Footer -->
