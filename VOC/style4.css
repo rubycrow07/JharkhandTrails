@@ -13,7 +13,8 @@ body {
   color: #fff;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* centers vertically */
+
   font-family: 'Poppins', sans-serif;
 }
 
@@ -194,14 +195,16 @@ button:hover {
 .back-link {
   display: inline-block;
   margin-top: 25px;
-  color: #7b2ff7;
+  color: #7b2ff7; 
   font-weight: 600;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7); /* makes text pop */
   user-select: none;
 }
-
 .back-link:hover {
+  color: #fff;
   text-decoration: underline;
 }
+
 
 /* Forms */
 form label {
@@ -685,4 +688,10 @@ input:focus {
   .download-btn {
     width: 100%;
   }
+}
+.welcome-container {
+  text-align: center; /* center all text inside */
+  max-width: 600px;
+  margin: auto;
+  padding: 40px 20px;
 }
