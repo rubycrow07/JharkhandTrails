@@ -22,7 +22,7 @@ BengalTrails/
 ├─ index.html  
 ├─ login.html  
 ├─ signup.html  
-├─ planning.html  
+├─ planning.html 
 ├─ hotels.html  
 ├─ css/  
 │ └─ style.css  
@@ -41,3 +41,4 @@ GitHub: https://github.com/rubycrow07
 
 ## 📄 License
 Open-source under the MIT License
+
