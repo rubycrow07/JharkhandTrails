@@ -1,5 +1,3 @@
-
-
 (() => {
   const scrollContainer = document.querySelector('.scroll-container');
   const destCards = Array.from(document.querySelectorAll('.dest-card'));
@@ -656,4 +654,5 @@ User question: ${text}`;
     setTimeout(() => msg.style.display = 'none', 3000);
   });
 })();
+
 
